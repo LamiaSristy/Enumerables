@@ -10,3 +10,4 @@ friends.my_each_with_index { |friend, index| puts friend if index.even? }
 
 puts '3.--------my_select--------'
 puts friends.my_select { |friend| friend != 'Brian' }
+
