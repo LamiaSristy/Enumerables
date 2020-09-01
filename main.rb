@@ -36,8 +36,12 @@ puts '6.--------my_none--------'
 # puts [nil, false].my_none?                                 #=> true
 # puts [nil, false, true].my_none?                           #=> false
 
-puts '6.--------my_count--------'
-arr = [1, 2, 4, 2]
-puts arr.my_count   
-puts arr.my_count(2) 
-puts arr.my_count { |x| x%2 == 0 }
+puts '7.--------my_count--------'
+# arr = [1, 2, 4, 2]
+# puts arr.my_count
+# puts arr.my_count(2)
+# puts arr.my_count { |x| x%2 == 0 }
+
+puts '8.--------my_count--------'
+friends = ['Sharon', 'Leo', 'Leila', 'Brian', 'Arun']
+puts friends.my_map { |friend| friend.upcase }

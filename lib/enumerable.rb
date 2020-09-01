@@ -1,3 +1,4 @@
+# rubocop: disable Metrics/ModuleLength
 # rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
 module Enumerable
@@ -76,12 +77,17 @@ module Enumerable
     elsif !block_given? && param.nil?
         c = to_a.length
     else    
-        new_arr = []
-        new_arr = to_a.my_select { |item| item == param }
-        c = new_arr.length
+      c = to_a.my_select { |item| item == param }.length
     end   
   c  
   end
+
+  # 8.my_maps
+  def my_map
+    new_arr=[]
+    to_a.my_each { |item| new_arr << yield(item) } 
+    new_arr    
+ end
 
 end
 
