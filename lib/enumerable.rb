@@ -1,4 +1,3 @@
-# rubocop: disable Metrics/ModuleLength
 # rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
 module Enumerable
@@ -36,7 +35,7 @@ module Enumerable
     new_arr
   end
 
-  # 3.my_all?
+  # 4.my_all?
   def my_all?(param = nil)
     if param.class == Class
       to_a.my_each { |item| return false unless [item.class, item.class.superclass].include?(param) }
@@ -50,7 +49,7 @@ module Enumerable
     true
   end
 
-  # 3.my_any?
+  # 5.my_any?
   def my_any?(param = nil)
     if param.class == Class
       to_a.my_each { |item| return true if [item.class, item.class.superclass].include?(param) }
@@ -64,8 +63,27 @@ module Enumerable
     false
   end
 
-  # 3.my_none?
+  # 6.my_none?
   def my_none?(param = nil)
     !my_any?(&Proc.new)
   end
+
+  # 7.my_none?
+  def my_count(param = nil)
+    c = 0
+    if block_given?
+        to_a.my_each { |item| c += 1 if yield(item) }
+    elsif !block_given? && param.nil?
+        c = to_a.length
+    else    
+        new_arr = []
+        new_arr = to_a.my_select { |item| item == param }
+        c = new_arr.length
+    end   
+  c  
+  end
+
 end
+
+
+# rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity

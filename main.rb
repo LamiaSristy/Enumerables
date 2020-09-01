@@ -12,19 +12,19 @@ require_relative 'lib/enumerable.rb'
 # puts friends.my_select { |friend| friend != 'Brian' }
 
 puts '4.--------my_all--------'
-puts %w[ant bear cat].my_all? { |word| word.length >= 3 }
-puts %w[ant bear cat].my_all? { |word| word.length >= 4 }
-puts %w[ant bear cat].my_all?(/t/)
-puts [1, 2i, 3.14].my_all?(Numeric)
-puts [].my_all?
+# puts %w[ant bear cat].my_all? { |word| word.length >= 3 }
+# puts %w[ant bear cat].my_all? { |word| word.length >= 4 }
+# puts %w[ant bear cat].my_all?(/t/)
+# puts [1, 2i, 3.14].my_all?(Numeric)
+# puts [].my_all?
 
 puts '5.--------my_any--------'
-puts %w[ant bear cat].my_any? { |word| word.length >= 3 } #=> true
-puts %w[ant bear cat].my_any? { |word| word.length >= 4 } #=> true
-puts %w[ant bear cat].my_any?(/d/)                        #=> false
-puts [nil, true, 99].my_any?(Integer)                     #=> true
-puts [nil, true, 99].my_any?                              #=> true
-puts [].my_any?                                           #=> false
+# puts %w[ant bear cat].my_any? { |word| word.length >= 3 } #=> true
+# puts %w[ant bear cat].my_any? { |word| word.length >= 4 } #=> true
+# puts %w[ant bear cat].my_any?(/d/)                        #=> false
+# puts [nil, true, 99].my_any?(Integer)                     #=> true
+# puts [nil, true, 99].my_any?                              #=> true
+# puts [].my_any?                                           #=> false
 
 puts '6.--------my_none--------'
 # puts %w{ant bear cat}.my_none? { |word| word.length == 5 } #=> true
@@ -35,3 +35,9 @@ puts '6.--------my_none--------'
 # puts [nil].my_none?                                        #=> true
 # puts [nil, false].my_none?                                 #=> true
 # puts [nil, false, true].my_none?                           #=> false
+
+puts '6.--------my_count--------'
+arr = [1, 2, 4, 2]
+puts arr.my_count   
+puts arr.my_count(2) 
+puts arr.my_count { |x| x%2 == 0 }
