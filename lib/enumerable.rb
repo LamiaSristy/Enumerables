@@ -1,4 +1,8 @@
+# rubocop: disable Metrics/ModuleLength
+# rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+
 module Enumerable
+
   # 1.my_each
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -34,48 +38,34 @@ module Enumerable
 
   # 3.my_all?
   def my_all?(param = nil)
-    flag = true
-    if  param.class == Class
-       to_a.my_each { |item| return false if !(item.class == param || (item.class).superclass == param)  }
-
+    if param.class == Class
+      to_a.my_each { |item| return false unless [item.class, item.class.superclass].include?(param) }
     elsif param.class == Regexp
-        to_a.my_each {|item| return false if !(item.match(param))}
-
+      to_a.my_each { |item| return false unless item.match(param) }
     elsif !block_given?
-        to_a.my_each {|item| return false if item.nil? || !item}
+      to_a.my_each { |item| return false if item.nil? || !item }
     else
-        to_a.my_each {|item| return false if !yield item }
+      to_a.my_each { |item| return false unless yield item }
     end
-    flag
+    true
   end
 
   # 3.my_any?
-  def my_any?(param = nil) 
-
-    flag = false
-     
-    if  param.class == Class 
-        to_a.my_each {|item| return true if (item.class == param || (item.class).superclass == param)}
-    
-    elsif param.class == Regexp    
-        to_a.my_each {|item| return true  if (item.match(param))}
-
+  def my_any?(param = nil)
+    if param.class == Class
+      to_a.my_each { |item| return true if [item.class, item.class.superclass].include?(param) }
+    elsif param.class == Regexp
+      to_a.my_each { |item| return true if item.match(param) }
     elsif !block_given?
-       
-        to_a.my_each {|item| return true if !(item.nil? || !item)}
-
+      to_a.my_each { |item| return true unless item.nil? || !item }
     else
-        to_a.my_each {|item| return true if yield item }
-    end       
-    flag
+      to_a.my_each { |item| return true if yield item }
+    end
+    false
   end
 
   # 3.my_none?
-  def my_none?(param = nil) 
+  def my_none?(param = nil)
     !my_any?(&Proc.new)
   end
-
 end
-
-
-
