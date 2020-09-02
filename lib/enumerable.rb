@@ -1,8 +1,6 @@
-# rubocop: disable Metrics/ModuleLength
 # rubocop: disable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 
 module Enumerable
-
   # 1.my_each
   def my_each
     return to_enum(:my_each) unless block_given?
@@ -68,7 +66,7 @@ module Enumerable
   def my_none?(param = nil)
     if block_given?
       !my_any?(&Proc.new)
-    else 
+    else
       !my_any?(param)
     end
   end
@@ -83,7 +81,7 @@ module Enumerable
     else
       c = to_a.my_select { |item| item == param }.length
     end
-  c
+    c
   end
 
   # 8.my_maps
@@ -93,7 +91,7 @@ module Enumerable
     arr = []
     if proc.nil?
       to_a.my_each { |item| arr << yield(item) }
-    else 
+    else
       to_a.my_each { |item| arr << proc.call(item) }
     end
     arr

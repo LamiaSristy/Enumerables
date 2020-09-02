@@ -1,6 +1,19 @@
 # Enumerables
 In this project, I have implemented my own version of Ruby’s enumerable methods.
 
+## Enumerable Methods List:
+
+- my_each
+- my_each_with_index
+- my_select
+- my_all?
+- my_any?
+- my_none?
+- my_count
+- my_map
+- my_inject
+- multiply_els
+
 ## Built With
 
 - Ruby
