@@ -36,28 +36,34 @@ module Enumerable
 
   # 4.my_all?
   def my_all?(param = nil)
-    if param.class == Class
+    if block_given?
+      to_a.my_each { |item| return false if yield(item) == false }
+      return true
+    elsif param.nil?
+      to_a.my_each { |item| return false if item.nil? || item == false }
+    elsif !param.nil? && (param.is_a? Class)
       to_a.my_each { |item| return false unless [item.class, item.class.superclass].include?(param) }
-    elsif param.class == Regexp
-      to_a.my_each { |item| return false unless item.match(param) }
-    elsif !block_given?
-      to_a.my_each { |item| return false if item.nil? || !item }
+    elsif !param.nil? && param.class == Regexp
+      to_a.my_each { |item| return false unless param.match(item) }
     else
-      to_a.my_each { |item| return false unless yield item }
+      to_a.my_each { |item| return false if item != param }
     end
     true
   end
 
   # 5.my_any?
   def my_any?(param = nil)
-    if param.class == Class
+    if block_given?
+      to_a.my_each { |item| return true if yield(item) }
+      return false
+    elsif param.nil?
+      to_a.my_each { |item| return true if item }
+    elsif !param.nil? && (param.is_a? Class)
       to_a.my_each { |item| return true if [item.class, item.class.superclass].include?(param) }
-    elsif param.class == Regexp
-      to_a.my_each { |item| return true if item.match(param) }
-    elsif !block_given?
-      to_a.my_each { |item| return true unless item.nil? || !item }
+    elsif !param.nil? && param.class == Regexp
+      to_a.my_each { |item| return true if param.match(item) }
     else
-      to_a.my_each { |item| return true if yield item }
+      to_a.my_each { |item| return true if item == param }
     end
     false
   end
@@ -99,12 +105,19 @@ module Enumerable
 
   # 9.my_inject
   def my_inject(initial = nil, sym = nil)
-    if !block_given? && !sym.nil?
-      to_a.my_each { |item| initial = initial.nil? ? item : initial.send(sym, item) }
-    else
-      to_a.my_each { |item| initial = initial.nil? ? item : yield(initial, item) }
+    if block_given?
+      num = initial
+      to_a.my_each { |item| num = num.nil? ? item : yield(num, item) }
+      num
+    elsif !initial.nil? && (initial.is_a?(Symbol) || initial.is_a?(String))
+      num = nil
+      to_a.my_each { |item| num = num.nil? ? item : num.send(initial, item) }
+      num
+    elsif !sym.nil? && (sym.is_a?(Symbol) || sym.is_a?(String))
+      num = initial
+      to_a.my_each { |item| num = num.nil? ? item : num.send(sym, item) }
+      num
     end
-    initial
   end
 end
 
