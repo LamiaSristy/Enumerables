@@ -66,30 +66,48 @@ module Enumerable
 
   # 6.my_none?
   def my_none?(param = nil)
-    !my_any?(&Proc.new)
+    if block_given?
+      !my_any?(&Proc.new)
+    else 
+      !my_any?(param)
+    end
   end
 
-  # 7.my_none?
+  # 7.my_count?
   def my_count(param = nil)
     c = 0
     if block_given?
-        to_a.my_each { |item| c += 1 if yield(item) }
+      to_a.my_each { |item| c += 1 if yield(item) }
     elsif !block_given? && param.nil?
-        c = to_a.length
-    else    
+      c = to_a.length
+    else
       c = to_a.my_select { |item| item == param }.length
-    end   
-  c  
+    end
+  c
   end
 
   # 8.my_maps
-  def my_map
-    new_arr=[]
-    to_a.my_each { |item| new_arr << yield(item) } 
-    new_arr    
- end
+  def my_map(proc = nil)
+    return to_enum(:my_map) unless block_given? || !proc.nil?
 
+    arr = []
+    if proc.nil?
+      to_a.my_each { |item| arr << yield(item) }
+    else 
+      to_a.my_each { |item| arr << proc.call(item) }
+    end
+    arr
+  end
+
+  # 9.my_inject
+  def my_inject(initial = nil, sym = nil)
+    if !block_given? && !sym.nil?
+      to_a.my_each { |item| initial = initial.nil? ? item : initial.send(sym, item) }
+    else
+      to_a.my_each { |item| initial = initial.nil? ? item : yield(initial, item) }
+    end
+    initial
+  end
 end
-
 
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
