@@ -45,7 +45,7 @@ puts '6.--------my_none--------'
 puts '8.--------my_maps--------'
 # my_order = ['medium Big Mac', 'medium fries', 'medium milkshake']
 # puts (my_order.my_map { |item| item.gsub('medium', 'extra large') })
-# puts ((0..5).my_map { |i| i * i })
+# puts ((0..5).my_map { |i| i * i })  +
 # puts 'my_map_proc'
 # my_proc = proc { |i| i * i }
 # puts (1..5).my_map(my_proc){ |i| i + i }
@@ -57,3 +57,9 @@ longest = %w[ant bear cat].my_inject do |memo, word|
   memo.length > word.length ? memo : word
 end
 puts longest                                            #=> "bear"
+
+puts 'multiply_els'
+def multiply_els (arr)
+    arr.my_inject(1, "*") 
+end
+puts multiply_els([2,4,5])                              #=> 40
