@@ -14,6 +14,9 @@ In this project, I have implemented my own version of Ruby’s enumerable method
 - my_inject
 - multiply_els
 
+## Live Code
+[![Run on Repl.it](https://repl.it/@lamiasristy/MyEnumerableRuby#main.rb)
+
 ## Built With
 
 - Ruby
