@@ -105,20 +105,22 @@ module Enumerable
 
   # 9.my_inject
   def my_inject(initial = nil, sym = nil)
-    if block_given?
-      num = initial
-      to_a.my_each { |item| num = num.nil? ? item : yield(num, item) }
-      num
-    elsif !initial.nil? && (initial.is_a?(Symbol) || initial.is_a?(String))
-      num = nil
-      to_a.my_each { |item| num = num.nil? ? item : num.send(initial, item) }
-      num
-    elsif !sym.nil? && (sym.is_a?(Symbol) || sym.is_a?(String))
-      num = initial
-      to_a.my_each { |item| num = num.nil? ? item : num.send(sym, item) }
-      num
+    if (!initial.nil? && sym.nil?) && (initial.is_a?(Symbol) || initial.is_a?(String))
+      sym = initial
+      initial = nil
     end
+    if !block_given? && !sym.nil?
+      to_a.my_each { |item| initial = initial.nil? ? item : initial.send(sym, item) }
+    else
+      to_a.my_each { |item| initial = initial.nil? ? item : yield(initial, item) }
+    end
+    initial
   end
 end
 
 # rubocop: enable Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
+
+# 10.multiply_els
+def multiply_els(arr)
+  arr.my_inject(1, '*')
+end
