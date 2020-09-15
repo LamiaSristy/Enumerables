@@ -13,15 +13,15 @@ RSpec.describe 'my enumerable methods' do
     end
 
     it 'should return each array items' do
-      expect(my_array.my_each {|el| el}).to eq(my_array.each {|el| el})
+      expect(my_array.my_each { |el| el}).to eq(my_array.each { |el| el})
     end
 
     it 'should return each item from a given range' do
-      expect(my_range.my_each {|el| el}).to eq(my_range.each {|el| el})
+      expect(my_range.my_each { |el| el}).to eq(my_range.each { |el| el})
     end
 
     it 'should return each item key a given hash-rage' do
-      expect(my_hash.my_each {|key, value| key}).to eq(my_hash.each {|key, value| key})
+      expect(my_hash.my_each { |key, value| key}).to eq(my_hash.each { |key, value| key})
     end
   end
 
@@ -43,7 +43,7 @@ RSpec.describe 'my enumerable methods' do
     end
 
     it 'should return each item key a given hash-rage' do
-      expect(my_hash.my_each_with_index { |key, value| key}).to eq(my_hash.each_with_index {|key, value| key})
+      expect(my_hash.my_each_with_index { |key, value| key}).to eq(my_hash.each_with_index { |key, value| key})
     end
   end
 
@@ -185,13 +185,13 @@ RSpec.describe 'my enumerable methods' do
     end
 
     it 'should return the frequency numbers inside array which are divisible with a given number' do
-      expect((-3..8).my_count {|x| x.positive?}).to eql(8)
+      expect((-3..8).my_count { |x| x.positive?}).to eql(8)
     end
   end
 
   context 'test my_map' do
     it 'should return the array with changed medium to extra_large' do
-      expect(my_order.my_map {|x| x.gsub('medium', 'extra large')}).to eql(['extra large Big Mac', 'extra large fries', 'extra large milkshake'])
+      expect(my_order.my_map { |x| x.gsub('medium', 'extra large')}).to eql(['extra large Big Mac', 'extra large fries', 'extra large milkshake'])
     end
 
     it 'should return the array with squared element of each element' do
