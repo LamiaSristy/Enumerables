@@ -46,13 +46,14 @@ require_relative 'lib/enumerable.rb'
 # arr.my_count(2) #=> 2
 # (arr.my_count { |x| (x % 2).zero? }) #=> 3
 
+
 # puts '8.--------my_maps--------'
 # my_order = ['medium Big Mac', 'medium fries', 'medium milkshake']
 # (my_order.my_map { |item| item.gsub('medium', 'extra large') })
-# ((0..5).my_map { |i| i * i })
-# puts 'my_map_proc'
+# 'my_map_proc'
 # my_proc = proc { |i| i * i }
-# (1..5).my_map(my_proc) { |i| i + i }
+# puts (1..5).my_map(my_proc) { |i| i + i }
+# puts (1..5).my_map(my_proc)
 
 # puts '8.--------my_inject--------'
 # ((1..5).my_inject { |sum, n| sum + n }) #=> 15
