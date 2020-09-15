@@ -1,15 +1,16 @@
 require_relative 'lib/enumerable.rb'
 
-puts '1.--------my_each--------'
+# puts '1.--------my_each--------'
 # %w[Sharon Leo Leila Brian Arun].my_each { |friend| puts friend }
 
 
 # puts '2.--------my_each_with_index--------'
 # %w[Sharon Leo Leila Brian Arun].my_each_with_index { |friend, index| puts friend if index.even? }
 
-# puts '3.--------my_select--------'
+puts '3.--------my_select--------'
 # arr = (%w[Sharon Leo Leila Brian Arun].my_select { |friend| friend != 'Brian' })
-# puts arr
+arr = (%w[Sharon Leo Leila Brian Arun].my_select { |friend| friend == 'Brian' })
+puts arr
 
 # puts '4.--------my_all--------'
 # (%w[ant bear cat].my_all? { |word| word.length >= 3 }) #=> true
