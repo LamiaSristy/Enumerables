@@ -29,9 +29,29 @@ module Enumerable
   def my_select
     return to_enum(:my_select) unless block_given?
 
-    new_arr = []
-    to_a.my_each { |item| new_arr << item if yield item }
-    new_arr
+    filtered = []
+
+    if self.class == Hash
+      filtered = {}
+
+      my_each do |el|
+        key = el [0]
+        value = el [1]
+        filtered [key] = value if yield(el[0])
+      end
+
+      filtered
+
+    else
+
+      filtered = []
+
+      my_each do |el|
+        filtered.push(el) if yield(el)
+      end
+    end
+
+    filtered
   end
 
   # 4.my_all?

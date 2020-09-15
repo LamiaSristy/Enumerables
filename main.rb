@@ -14,12 +14,13 @@ require_relative 'lib/enumerable.rb'
 # arr = (%w[Sharon Leo Leila Brian Arun].my_select { |friend| friend == 'Brian' })
 # puts arr
 
+
 # puts '4.--------my_all--------'
-# (%w[ant bear cat].my_all? { |word| word.length >= 3 }) #=> true
-# (%w[ant bear cat].my_all? { |word| word.length >= 4 }) #=> false
-# %w[ant bear cat].my_all?(/t/) #=> false
-# [1, 2i, 3.14].my_all?(Numeric) #=> true
-# [].my_all? #=> true
+# puts (%w[ant bear cat].my_all? { |word| word.length >= 3 }) #=> true
+# puts (%w[ant bear cat].my_all? { |word| word.length >= 4 }) #=> false
+# puts %w[ant bear cat].my_all?(/t/) #=> false
+# puts [1, 2i, 3.14].my_all?(Numeric) #=> true
+# puts [].my_all? #=> true
 
 # puts '5.--------my_any--------'
 # (%w[ant bear cat].my_any? { |word| word.length >= 3 }) #=> true
