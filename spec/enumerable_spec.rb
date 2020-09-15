@@ -31,19 +31,19 @@ RSpec.describe 'my enumerable methods' do
     end
 
     it 'should return every even element' do
-       expect(my_array.my_each_with_index {|el, index| el if index.even? }).to eql(my_array.each_with_index {|el, index| el if index.even? })
+       expect(my_array.my_each_with_index { |el, index| el if index.even? }).to eql(my_array.each_with_index { |el, index| el if index.even? })
     end
 
       it 'should return every even element' do
-        expect(my_array.my_each_with_index {|el, index| el if index%3 ==0 }).to eql(my_array.each_with_index {|el, index| el if index%3 ==0})
+        expect(my_array.my_each_with_index { |el, index| el if index%3 ==0 }).to eql(my_array.each_with_index { |el, index| el if index%3 ==0})
      end
 
     it 'should return each item from a given range' do
-      expect(my_range.my_each_with_index {|el| el}).to eq(my_range.each_with_index {|el| el})
+      expect(my_range.my_each_with_index { |el| el}).to eq(my_range.each_with_index { |el| el})
     end
 
     it 'should return each item key a given hash-rage' do
-      expect(my_hash.my_each_with_index {|key, value| key}).to eq(my_hash.each_with_index {|key, value| key})
+      expect(my_hash.my_each_with_index { |key, value| key}).to eq(my_hash.each_with_index {|key, value| key})
     end
   end
 
