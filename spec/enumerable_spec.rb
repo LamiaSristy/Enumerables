@@ -13,15 +13,15 @@ RSpec.describe 'my enumerable methods' do
     end
 
     it 'should return each array items' do
-      expect(my_array.my_each { |el| el}).to eq(my_array.each { |el| el})
+      expect(my_array.my_each { |el| el }).to eq(my_array.each { |el| el })
     end
 
     it 'should return each item from a given range' do
-      expect(my_range.my_each { |el| el}).to eq(my_range.each { |el| el})
+      expect(my_range.my_each { |el| el }).to eq(my_range.each { |el| el })
     end
 
     it 'should return each item key a given hash-rage' do
-      expect(my_hash.my_each { |key, value| key}).to eq(my_hash.each { |key, value| key})
+      expect(my_hash.my_each { |key, _value| key }).to eq(my_hash.each { |key, _value| key })
     end
   end
 
@@ -31,19 +31,19 @@ RSpec.describe 'my enumerable methods' do
     end
 
     it 'should return every even element' do
-       expect(my_array.my_each_with_index { |el, index| el if index.even? }).to eql(my_array.each_with_index { |el, index| el if index.even? })
+      expect(my_array.my_each_with_index { |el, index| el if index.even? }).to eql(my_array.each_with_index { |el, index| el if index.even? })
     end
 
-      it 'should return every even element' do
-        expect(my_array.my_each_with_index { |el, index| el if index%3 ==0 }).to eql(my_array.each_with_index { |el, index| el if index%3 ==0})
-     end
+    it 'should return every even element' do
+      expect(my_array.my_each_with_index { |el, index| el if index % 3 == 0 }).to eql(my_array.each_with_index { |el, index| el if index % 3 == 0 })
+    end
 
     it 'should return each item from a given range' do
-      expect(my_range.my_each_with_index { |el| el}).to eq(my_range.each_with_index { |el| el})
+      expect(my_range.my_each_with_index { |el| el }).to eq(my_range.each { |el| el })
     end
 
     it 'should return each item key a given hash-rage' do
-      expect(my_hash.my_each_with_index { |key, value| key}).to eq(my_hash.each_with_index { |key, value| key})
+      expect(my_hash.my_each_with_index { |key, _value| key }).to eq(my_hash.each_with_index { |key, _value| key })
     end
   end
 
@@ -53,23 +53,23 @@ RSpec.describe 'my enumerable methods' do
     end
 
     it 'should return every element except the selected element' do
-      expect(my_array.my_select{ |el| el != 'Brian' }).to eql(my_array.select{ |el| el != 'Brian' })
+      expect(my_array.my_select { |el| el != 'Brian' }).to eql(my_array.select { |el| el != 'Brian' })
     end
 
     it 'should return every selected element' do
-      expect(my_array.my_select{ |el| el == 'Brian' }).to eql(my_array.select{ |el| el == 'Brian' })
+      expect(my_array.my_select { |el| el == 'Brian' }).to eql(my_array.select { |el| el == 'Brian' })
     end
 
     it 'should return element from range' do
-      expect(my_range.my_select{ |el| el == 5 }).to eql(my_range.select{ |el| el == 5 })
+      expect(my_range.my_select { |el| el == 5 }).to eql(my_range.select { |el| el == 5 })
     end
 
-     it 'should return every element except the selected element' do
-      expect(my_range.my_select{ |el| el != 5 }).to eql(my_range.select{ |el| el != 5 })
+    it 'should return every element except the selected element' do
+      expect(my_range.my_select { |el| el != 5 }).to eql(my_range.select { |el| el != 5 })
     end
 
     it 'should select the key which is equal to blocks condition' do
-       expect(my_hash.my_select{ |key,value| key == :a }).to eql({:a=>"abs"})
+      expect(my_hash.my_select { |key, _value| key == :a }).to eql({ a: 'abs' })
     end
   end
 
@@ -103,7 +103,7 @@ RSpec.describe 'my enumerable methods' do
     end
 
     it 'should check if every element inside range is negative' do
-      expect((-3 .. -90).my_all? { |el| el.negative? }).to eq(true)
+      expect((-3..-90).my_all? { |el| el.negative? }).to eq(true)
     end
   end
 
@@ -133,7 +133,7 @@ RSpec.describe 'my enumerable methods' do
     end
 
     it 'should check if any element inside range is positive' do
-      expect((-3 .. 8).my_any? { |el| el.positive? }).to eq(true)
+      expect((-3..8).my_any? { |el| el.positive? }).to eq(true)
     end
 
     it 'should check if any element inside range is negative' do
@@ -181,17 +181,17 @@ RSpec.describe 'my enumerable methods' do
     end
 
     it 'should return the frequency numbers inside array which are divisible with a given number' do
-      expect(num_array.my_count{ |x| (x % 2).zero? }).to eql(2)
+      expect(num_array.my_count { |x| (x % 2).zero? }).to eql(2)
     end
 
     it 'should return the frequency numbers inside array which are divisible with a given number' do
-      expect((-3..8).my_count { |x| x.positive?}).to eql(8)
+      expect((-3..8).my_count { |x| x.positive? }).to eql(8)
     end
   end
 
   context 'test my_map' do
     it 'should return the array with changed medium to extra_large' do
-      expect(my_order.my_map { |x| x.gsub('medium', 'extra large')}).to eql(['extra large Big Mac', 'extra large fries', 'extra large milkshake'])
+      expect(my_order.my_map { |x| x.gsub('medium', 'extra large') }).to eql(['extra large Big Mac', 'extra large fries', 'extra large milkshake'])
     end
 
     it 'should return the array with squared element of each element' do
@@ -199,8 +199,8 @@ RSpec.describe 'my enumerable methods' do
     end
 
     it 'should return the array with squared element of each element' do
-      my_proc = proc { |x| x + 2}
-      expect(my_range.my_map(my_proc)).to eq([7,8,9,10,11,12])
+      my_proc = proc { |x| x + 2 }
+      expect(my_range.my_map(my_proc)).to eq([7, 8, 9, 10, 11, 12])
     end
   end
 
