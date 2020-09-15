@@ -5,8 +5,7 @@ RSpec.describe 'my enumerable methods' do
   let(:my_range) { (5..10) }
   let(:my_hash) { { a: 'abs', b: 'cdr' } }
   let(:num_array) { [1, 2, 3, 4, 5] }
-  let(:my_order) {['medium Big Mac', 'medium fries', 'medium milkshake']}
-  
+  let(:my_order) { ['medium Big Mac', 'medium fries', 'medium milkshake'] }
 
   context 'test my_each' do
     # it 'should return enumerator object if block is not given' do
@@ -72,7 +71,6 @@ RSpec.describe 'my enumerable methods' do
     # it 'should select the key which is equal to blocks condition' do
     #    expect(my_hash.my_select{ |key,value| key == :a }).to eql({:a=>"abs"})
     # end
-
   end
 
   context 'test my_all' do
@@ -107,7 +105,6 @@ RSpec.describe 'my enumerable methods' do
     # it 'should check if every element inside range is negative' do
     #   expect((-3 .. -90).my_all? { |el| el.negative? }).to eq(true)
     # end
-    
   end
 
   context 'test my_any' do
@@ -142,11 +139,9 @@ RSpec.describe 'my enumerable methods' do
     # it 'should check if any element inside range is negative' do
     #   expect(my_range.my_any? { |el| el.negative? }).to eq(false)
     # end
-    
   end
 
   context 'test my_none' do
-
     # it 'should return true if none of the element has length of 5' do
     #   expect(%w[ant bear cat].my_none? { |word| word.length == 5 }).to be true
     # end
@@ -154,27 +149,25 @@ RSpec.describe 'my enumerable methods' do
     # it 'should return false if none of the element has length of greater than 4' do
     #   expect(%w[ant bear cat].my_none? { |word| word.length >= 4 }).to be false
     # end
-    
+
     # it 'should return true if none of the element is Regex /d/' do
     #   expect(%w[ant bear cat].my_none?(/d/)).to be true
     # end
-    
+
     # it 'should return false if none of the element is Floatx /d/' do
     #   expect([1, 3.14, 42].my_none?(Float)).to be false
     # end
-    
+
     # it 'should return true if its an empty array' do
     #   expect([].my_none?).to be true
     # end
-    
+
     # it 'should return true if its an array with falsy elements ' do
     #   expect([nil, false].my_none?).to be true
     # end
-    
   end
 
   context 'test my_count' do
-
     # it 'should return 0 if there is an empty array and no block given' do
     #   expect([].my_count).to eq(0)
     # end
@@ -182,7 +175,7 @@ RSpec.describe 'my enumerable methods' do
     # it 'should return the length of the array which is 5' do
     #   expect(num_array.my_count).to eql(num_array.length)
     # end
- 
+
     # it 'should return the frequency of given number inside array' do
     #   expect(num_array.my_count(2)).to eql(1)
     # end
@@ -194,11 +187,9 @@ RSpec.describe 'my enumerable methods' do
     # it 'should return the frequency numbers inside array which are divisible with a given number' do
     #   expect((-3..8).my_count {|x| x.positive?}).to eql(8)
     # end
-
   end
 
   context 'test my_map' do
-    
     # it 'should return the array with changed medium to extra_large' do
     #   expect(my_order.my_map {|x| x.gsub('medium', 'extra large')}).to eql(['extra large Big Mac', 'extra large fries', 'extra large milkshake'])
     # end
@@ -211,31 +202,28 @@ RSpec.describe 'my enumerable methods' do
     #   my_proc = proc { |x| x + 2}
     #   expect(my_range.my_map(my_proc)).to eq([7,8,9,10,11,12])
     # end
-
   end
 
   context 'test my_inject' do
-
-    it 'should return the sum of all the elements' do       
-        expect(my_range.my_inject { |sum, n| sum + n }).to eq(45)
+    it 'should return the sum of all the elements' do
+      expect(my_range.my_inject { |sum, n| sum + n }).to eq(45)
     end
 
-    it 'should return the multiplication of all the elements startting with the given number' do       
+    it 'should return the multiplication of all the elements startting with the given number' do
       expect((1..5).my_inject(1) { |product, n| product * n }).to eq(120)
     end
 
-    it 'should return one string by concating array elements' do       
+    it 'should return one string by concating array elements' do
       expect(['I ', 'love ', 'ice water'].my_inject { |acc, cur| acc + cur }).to eq('I love ice water')
     end
   end
 
-  context 'test multiply_els' do 
-    it 'should return the multiplication of all the elements' do       
-      expect(multiply_els([2, 4, 5])).to eq(40)     
-    end 
-  end   
+  context 'test multiply_els' do
+    it 'should return the multiplication of all the elements' do
+      expect(multiply_els([2, 4, 5])).to eq(40)
+    end
+  end
 
-  
   it "hope TSE's will approve our project from first try, dont disappoint us" do
     expect('of course they will approve').to eq('of course they will approve')
   end
